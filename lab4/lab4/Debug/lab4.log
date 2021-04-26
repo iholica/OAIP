@@ -1,0 +1,4 @@
+﻿  lab4.cpp
+C:\Users\You\Desktop\-\OAIP\lab4\lab4\lab4.cpp(46,10): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+C:\Users\You\Desktop\-\OAIP\lab4\lab4\lab4.cpp(48,15): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
+  lab4.vcxproj -> C:\Users\You\Desktop\-\OAIP\lab4\Debug\lab4.exe

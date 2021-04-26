@@ -5,50 +5,63 @@
 
 using namespace std;
 
-typedef float (*TFunction)(float);      // Декларация типа указателя на функцию
-float FunctionY(float);               // Декларации прототипов функций
-float FunctionS(float, int);
-void Out_Rez(float);
+typedef double (*TFunction)(double);    // Декларация типа указателя на функцию
+double FunctionY(double);               // Декларации прототипов функций
+double FunctionS(double);
+double FunctionYMinusS(double);
+void Out_Rez(TFunction, double, double, double);
 
 
 int main()
 {
-    double a, b, x, h, r, s = 0, y, m;
-    int n;
+    double a, b, h;
 
-    cout << "Enter a, b, n , h: " << endl;
+    cout << "Enter a, b, h: " << endl;
     cin >> a;
     cin >> b;
-    cin >> n;
     cin >> h;
 
+    cout << "FunctionY" << endl;
+    Out_Rez(FunctionY, a, b, h);
 
+    cout << "FunctionS" << endl;
+    Out_Rez(FunctionS, a, b, h);
 
+    cout << "FunctionYMinusS" << endl;
+    Out_Rez(FunctionYMinusS, a, b, h);
+
+    cout << "Press any key ..." << endl;
+    return getchar();
 
 }
 
-float FunctionY(float a)
+double FunctionY(double x)
 {
-    y = -1 * (1 / 2) * log10(1 - 2 * x * cos(3.14 / 3 + pow(x, 2)));
+    return -1.0 * (1.0 / 2.0) * log10(1.0 - 2.0 * x * cos(3.14 / 3.0) + pow(x, 2.0));
 }
-float FunctionS(float a, int n)
+double FunctionS(double x)
 {
-    r = x;//начальное значение рекуренты
-    for (int k = 1; k <= n; k++)
+   double m = 1.0;
+   double s = 0.0;
+   int k = 1.0;
+
+   for (int k = 1.0; k <= 10; k++)
+   {
+       m *= x;
+       s += (m * cos((k * 3.14) / 3.0)) / k;
+   }
+
+    return s;
+}
+double FunctionYMinusS(double x)
+{
+    return fabs(FunctionY(x) - FunctionS(x));
+}
+void Out_Rez(TFunction function, double xn, double xk, double h)
+{
+    for (double x = xn; x <= xk; x += h)
     {
-        r = x;//рекурента
-        s += (pow(x, k) * cos((k * 3.14) / 3)) / k;
-    }
-}
-float FunctionYMinusS()
-{
-    m = fabs(s - y);
-}
-void Out_Rez(TFunction function, float xn, float xk, float h)
-{
-    for (float x = xn; x <= xk; x += h)
-    {
-        cout << "x = " << x << " y = " << function(x) << " and s - y = " << m << endl;
+        cout << "x = " << x << " y = " << function(x)  << endl;
     }
 }
 
